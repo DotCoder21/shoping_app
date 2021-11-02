@@ -11,6 +11,7 @@ class CardScreen extends StatefulWidget {
 }
 
 class _CardScreenState extends State<CardScreen> {
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,12 +86,13 @@ class _CardScreenState extends State<CardScreen> {
                               ),
                               Spacer(),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 10),
+                                        horizontal: 8, vertical: 7),
                                     child: Container(
-                                      height: Get.height * 0.035,
+                                      height: Get.height * 0.034,
                                       width: Get.width * 0.08,
                                       child: Icon(
                                         Icons.check,
@@ -102,6 +104,26 @@ class _CardScreenState extends State<CardScreen> {
                                           borderRadius:
                                               BorderRadius.circular(8)),
                                     ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              counter++;
+                                            });
+                                          },
+                                          child: Icon(Icons.add)),
+                                      Text(counter.toString()),
+                                      TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            counter--;
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      )
+                                    ],
                                   ),
                                 ],
                               )
