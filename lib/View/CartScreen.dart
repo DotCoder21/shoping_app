@@ -5,12 +5,12 @@ import 'package:shopify_app/AppConstants/AppConstants.dart';
 import 'package:shopify_app/DATA/AppData.dart';
 import 'package:shopify_app/Widgets/myWidgets.dart';
 
-class CardScreen extends StatefulWidget {
+class CartScreen extends StatefulWidget {
   @override
-  _CardScreenState createState() => _CardScreenState();
+  _CartScreenState createState() => _CartScreenState();
 }
 
-class _CardScreenState extends State<CardScreen> {
+class _CartScreenState extends State<CartScreen> {
   int counter = 0;
   @override
   Widget build(BuildContext context) {

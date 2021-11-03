@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopify_app/AppConstants/AppConstants.dart';
+import 'package:shopify_app/DATA/AppData.dart';
+import 'package:shopify_app/Models/CardsModel.dart';
+import 'package:shopify_app/Models/FavoriteModel.dart';
 import 'package:shopify_app/Widgets/myWidgets.dart';
 
 class DetailScreen extends StatefulWidget {
+
+   FavoriteModel item;
+
+  DetailScreen({this.item});
   @override
   _DetailScreenState createState() => _DetailScreenState();
 }
@@ -23,7 +30,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 height: Get.height * 0.6,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/pink.jpg"),
+                        image: AssetImage(widget.item.image),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(50),
@@ -41,11 +48,11 @@ class _DetailScreenState extends State<DetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Pink Blazer",
+                          widget.item.itemName,
                           style: AppConstants.kDarkStyle,
                         ),
                         Text(
-                          "\$400",
+                          widget.item.itemPrice,
                           style: AppConstants.kDarkStyle,
                         ),
                       ],
@@ -77,17 +84,32 @@ class _DetailScreenState extends State<DetailScreen> {
                             text: "Buy Now",
                             textColor: Colors.white,
                             color: Colors.pinkAccent.withOpacity(0.7)),
-                        Container(
-                          height: Get.height * 0.1,
-                          width: Get.width * 0.18,
-                          child: Center(
-                              child: Icon(
-                            Icons.shopping_cart,
-                            color: Colors.pinkAccent,
-                          )),
-                          decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.4),
-                              shape: BoxShape.circle),
+                        InkWell(
+                          onTap: (){
+                            
+                            cartList.add(
+                              CardsModel(
+                                image: widget.item.image,
+                                itemName: widget.item.itemName,
+                                itemPrice: widget.item.itemPrice
+                              ),
+
+                            );
+                              print(cartList);
+
+                          },
+                          child: Container(
+                            height: Get.height * 0.1,
+                            width: Get.width * 0.18,
+                            child: Center(
+                                child: Icon(
+                              Icons.shopping_cart,
+                              color: Colors.pinkAccent,
+                            )),
+                            decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.4),
+                                shape: BoxShape.circle),
+                          ),
                         ),
                       ],
                     ),

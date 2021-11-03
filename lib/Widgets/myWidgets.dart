@@ -49,11 +49,11 @@ Widget customAppBar(
         children: [
           Text(
             text1,
-            style: AppConstants.kLightStyle,
+            style: AppConstants.kLightStyle.copyWith(fontSize: 12),
           ),
           Text(
             text2,
-            style: AppConstants.kDarkStyle,
+            style: AppConstants.kDarkStyle.copyWith(fontSize: 14),
           ),
         ],
       ),

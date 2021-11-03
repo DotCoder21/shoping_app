@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopify_app/View/CardScreen.dart';
+import 'package:shopify_app/View/CartScreen.dart';
 
 import 'View/homeScreen.dart';
 
@@ -12,7 +12,7 @@ class _HomeState extends State<Home> {
   int index = 0;
   List list = [
     HomeScreen(),
-    CardScreen(),
+    CartScreen(),
     Container(),
     Container(),
   ];

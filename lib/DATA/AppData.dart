@@ -42,3 +42,7 @@ List<FavoriteModel> favoriteList = [
       itemPrice: "\$300",
       image: "assets/images/pink3.jpg"),
 ];
+
+
+
+List<CardsModel> cartList =[];

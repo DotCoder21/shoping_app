@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopify_app/AppConstants/AppConstants.dart';
 import 'package:shopify_app/DATA/AppData.dart';
+import 'package:shopify_app/Models/FavoriteModel.dart';
 import 'package:shopify_app/View/detailScreen.dart';
 import 'package:shopify_app/Widgets/myWidgets.dart';
+import 'package:shopify_app/utils/appColors.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -36,22 +38,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       customAppBar(
                         iconHeight: 0.1,
-                        iconWidth: 0.14,
+                        iconWidth: 0.10,
                         icon: Icons.widgets,
                         iconBackground: Colors.white,
-                        iconColor: Colors.pinkAccent,
+                        iconColor: AppColors.primaryColor.withOpacity(0.5),
                         text1: "Hallo zaskia",
                         text2: "Jakarta INA",
                         image: "assets/images/image7.jpg",
-                        radius: 29,
+                        radius: 20,
                       ),
                       Row(
                         children: [
                           Container(
-                            height: Get.height * 0.06,
-                            width: Get.width * 0.71,
+                            height: Get.height * 0.05,
+                            width: Get.width * 0.72,
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: AppColors.whiteColor,
                                 borderRadius: BorderRadius.circular(10)),
                             child: TextField(
                               decoration: InputDecoration(
@@ -64,15 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: Get.width * 0.03,
                           ),
                           Container(
-                            height: Get.height * 0.06,
+                            height: Get.height * 0.05,
                             width: Get.width * 0.14,
                             child: Icon(
                               Icons.wrap_text_sharp,
-                              color: Colors.white,
+                              color: AppColors.whiteColor,
                             ),
                             decoration: BoxDecoration(
-                                color: Colors.pinkAccent.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(20)),
+                                color: AppColors.primaryColor.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10)),
                           ),
                         ],
                       ),
@@ -103,14 +105,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Text(
                                     "Big Sale",
                                     style: AppConstants.kDarkStyle.copyWith(
-                                        color: Colors.white,
+                                        color: AppColors.whiteColor,
                                         fontSize: Get.height * 0.02,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "Get the trendy data at discount of up to 50%",
                                     style: AppConstants.kDarkStyle.copyWith(
-                                      color: Colors.white60,
+                                      color: AppColors.whiteColor.withOpacity(0.5),
                                       fontSize: Get.height * 0.014,
                                     ),
                                   ),
@@ -120,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.pink.withOpacity(0.8),
+                            color: AppColors.primaryColor.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(20)),
                       ),
                       SizedBox(
@@ -144,8 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             height: Get.height * 0.02,
                             decoration: BoxDecoration(
-                                color: i == 0 ? Colors.pinkAccent : Colors.grey,
-                                borderRadius: BorderRadius.circular(20)),
+                                color: i == 0 ? AppColors.primaryColor.withOpacity(0.5) : Colors.grey.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(18)),
                             child: Center(
                                 child: Text(
                               chips[i],
@@ -176,11 +178,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisSpacing: 2,
                                     crossAxisSpacing: 4,
                                     childAspectRatio: 0.6),
-                            itemCount: 4,
+                            itemCount: favoriteList.length,
                             itemBuilder: (cxt, i) {
                               return InkWell(
                                 onTap: () {
-                                  Get.to(() => DetailScreen());
+                                  Get.to(() => DetailScreen(
+                                    item: favoriteList[i],
+                                  ));
                                 },
                                 child: Container(
                                   // height: Get.height * 0.4,
@@ -198,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     favoriteList[i].image),
                                                 fit: BoxFit.cover),
                                             borderRadius:
-                                                BorderRadius.circular(40)),
+                                                BorderRadius.circular(30)),
                                       ),
                                       SizedBox(
                                         height: Get.height * 0.003,
@@ -212,12 +216,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Casual v-neck",
+                                                favoriteList[i].itemName,
                                                 style: AppConstants.kDarkStyle
                                                     .copyWith(fontSize: 12),
                                               ),
                                               Text(
-                                                "\$100",
+                                                "${favoriteList[i].itemPrice}",
                                                 style: AppConstants.kLightStyle
                                                     .copyWith(fontSize: 12),
                                               ),
@@ -228,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: Get.width * 0.009,
                                             child: Center(
                                                 child: Icon(
-                                              Icons.favorite,
+                                              Icons.favorite_border,
                                               color:
                                                   Colors.pink.withOpacity(0.4),
                                               size: 20,
