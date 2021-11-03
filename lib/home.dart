@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopify_app/View/CartScreen.dart';
+import 'package:shopify_app/View/orders.dart';
+import 'package:shopify_app/View/profile.dart';
 
 import 'View/homeScreen.dart';
 
@@ -13,8 +15,8 @@ class _HomeState extends State<Home> {
   List list = [
     HomeScreen(),
     CartScreen(),
-    Container(),
-    Container(),
+    Orders(),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {

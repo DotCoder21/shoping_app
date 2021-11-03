@@ -12,9 +12,22 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
-
   CartController cartController = Get.put(CartController());
+
+  void calculations() {
+    var sum = 0;
+
+    for (int i = 0; i < cartList.length; i++) {
+      print(cartList[i].itemPrice);
+
+      sum += cartList[i].itemPrice;
+    }
+
+    print(cartList);
+
+    print(sum);
+    cartController.totalCartPayment(sum);
+  }
 
   int counter = 0;
   @override
@@ -39,109 +52,106 @@ class _CartScreenState extends State<CartScreen> {
               ),
               Container(
                 height: Get.height * 0.58,
-                child: cartList.length <= 0 ? Container(
-                  margin:EdgeInsets.only(top: 40),
-                  child:
-                     Text("No Item Available"),
-                  
-                ) : cartList.isEmpty || cartList ==null? Container():ListView.builder(
-                    itemCount: cartList.length,
-                    itemBuilder: (cxt, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 6, horizontal: 9),
-                          height: Get.height * 0.12,
-                          width: Get.width,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Row(
-                            children: [
-                              Container(
-                                margin:
-                                    EdgeInsets.only(right: Get.width * 0.03),
-                                width: Get.width * 0.2,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                          cartList[index].image,
-                                        ),
-                                        fit: BoxFit.cover),
-                                    borderRadius: BorderRadius.circular(16)),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    cartList[index].itemName,
-                                    style: AppConstants.kDarkStyle
-                                        .copyWith(fontSize: 12),
-                                  ),
-                                  Text(
-                                    cartList[index].genderStyle,
-                                    style: AppConstants.kLightStyle
-                                        .copyWith(fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: Get.height * 0.024,
-                                  ),
-                                  Text(
-                                    cartList[index].itemPrice,
-                                    style: AppConstants.kDarkStyle,
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 7),
-                                    child: Container(
-                                      height: Get.height * 0.034,
-                                      width: Get.width * 0.08,
-                                      child: Icon(
-                                        Icons.check,
-                                        color: Colors.white,
-                                      ),
-                                      decoration: BoxDecoration(
-                                          color: Colors.pinkAccent
-                                              .withOpacity(0.6),
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                    ),
-                                  ),
-                                  Row(
+                child: cartList.length <= 0
+                    ? Container(
+                        margin: EdgeInsets.only(top: 40),
+                        child: Text("No Item Available"),
+                      )
+                    : cartList.isEmpty || cartList == null
+                        ? Container()
+                        : ListView.builder(
+                            itemCount: cartList.length,
+                            itemBuilder: (cxt, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 6, horizontal: 9),
+                                  height: Get.height * 0.12,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Row(
                                     children: [
-                                      TextButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              counter++;
-                                            });
-                                          },
-                                          child: Icon(Icons.add)),
-                                      Text(counter.toString()),
-                                      TextButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            counter--;
-                                          });
-                                        },
-                                        child: Icon(Icons.remove),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            right: Get.width * 0.03),
+                                        width: Get.width * 0.2,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                  cartList[index].image,
+                                                ),
+                                                fit: BoxFit.cover),
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            cartList[index].itemName,
+                                            style: AppConstants.kDarkStyle
+                                                .copyWith(fontSize: 12),
+                                          ),
+                                          Text(
+                                            cartList[index].genderStyle,
+                                            style: AppConstants.kLightStyle
+                                                .copyWith(fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            height: Get.height * 0.024,
+                                          ),
+                                          Text(
+                                            cartList[index]
+                                                .itemPrice
+                                                .toString(),
+                                            style: AppConstants.kDarkStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 7),
+                                            child: Container(
+                                              height: Get.height * 0.034,
+                                              width: Get.width * 0.08,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  cartList.removeAt(index);
+                                                  setState(() {
+                                                    calculations();
+                                                  });
+                                                },
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.pinkAccent
+                                                      .withOpacity(0.6),
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                            ),
+                                          ),
+                                          Inc(index),
+                                        ],
                                       )
                                     ],
                                   ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
+                                ),
+                              );
+                            }),
               ),
               SizedBox(
                 height: Get.height * 0.04,
@@ -158,10 +168,12 @@ class _CartScreenState extends State<CartScreen> {
                           style: AppConstants.kDarkStyle
                               .copyWith(color: Colors.grey),
                         ),
-                        Obx(()=>Text(
-                          cartController.totalCartPayment.toString(),
-                          style: AppConstants.kDarkStyle,
-                        ),),
+                        Obx(
+                          () => Text(
+                            cartController.totalCartPayment.toString(),
+                            style: AppConstants.kDarkStyle,
+                          ),
+                        ),
                       ],
                     ),
                     customButton(
@@ -177,6 +189,81 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class Inc extends StatefulWidget {
+  final index;
+
+  Inc(this.index);
+  @override
+  _IncState createState() => _IncState();
+}
+
+class _IncState extends State<Inc> {
+  CartController cartController = Get.find();
+
+  void calculations() {
+    var sum = 0;
+
+    for (int i = 0; i < cartList.length; i++) {
+      print(cartList[i].itemPrice);
+
+      sum += cartList[i].itemPrice;
+    }
+
+    print(cartList);
+
+    print(sum);
+    cartController.totalCartPayment(sum);
+  }
+
+  int counter = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        TextButton(
+            onPressed: () {
+              setState(() {
+                if (counter <= 0) {
+                } else {
+                  counter--;
+
+                  // var cal = cartList[widget.index].itemPrice * counter;
+
+                  // var total = cartController.totalCartPayment - cal;
+
+                  // cartController.totalCartPayment(total.value);
+                  // setState(() {});
+                }
+              });
+            },
+            child: Icon(Icons.remove)),
+        Text(counter.toString()),
+        TextButton(
+          onPressed: () {
+            setState(() {
+              counter++;
+
+              var cal = cartList[widget.index].itemPrice * counter;
+
+              print(cal);
+
+              var total = cartController.totalCartPayment += cal;
+              print(total);
+
+              // var total = cartController.totalCartPayment + cal;
+              // print(total);
+
+              // cartController.totalCartPayment();
+              setState(() {});
+            });
+          },
+          child: Icon(Icons.add),
+        )
+      ],
     );
   }
 }

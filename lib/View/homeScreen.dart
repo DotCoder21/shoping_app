@@ -221,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     .copyWith(fontSize: 12),
                                               ),
                                               Text(
-                                                "${favoriteList[i].itemPrice}",
+                                                "\$${favoriteList[i].itemPrice.toString()}",
                                                 style: AppConstants.kLightStyle
                                                     .copyWith(fontSize: 12),
                                               ),

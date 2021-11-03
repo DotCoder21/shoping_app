@@ -1,6 +1,6 @@
 class FavoriteModel {
   String image;
   String itemName;
-  String itemPrice;
+  int itemPrice;
   FavoriteModel({this.itemName, this.image, this.itemPrice});
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopify_app/AppConstants/AppConstants.dart';
@@ -5,6 +6,7 @@ import 'package:shopify_app/DATA/AppData.dart';
 import 'package:shopify_app/Models/CardsModel.dart';
 import 'package:shopify_app/Models/FavoriteModel.dart';
 import 'package:shopify_app/Widgets/myWidgets.dart';
+import 'package:shopify_app/controllers/cartController.dart';
 
 class DetailScreen extends StatefulWidget {
 
@@ -16,6 +18,8 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+
+  CartController cartController = Get.put(CartController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +56,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           style: AppConstants.kDarkStyle,
                         ),
                         Text(
-                          widget.item.itemPrice,
+                          "\$${widget.item.itemPrice}",
                           style: AppConstants.kDarkStyle,
                         ),
                       ],
@@ -92,11 +96,25 @@ class _DetailScreenState extends State<DetailScreen> {
                                 image: widget.item.image,
                                 itemName: widget.item.itemName,
                                 itemPrice: widget.item.itemPrice,
-                                genderStyle: "Lorem Ipsum Text is Used Here"
+                                genderStyle: "Lorem Ipsum"
                               ),
 
                             );
+
+                            var sum = 0 ;
+
+                            for(int i = 0;i<cartList.length; i++){
+
+                              print(cartList[i].itemPrice); 
+
+                              sum += cartList[i].itemPrice;
+
+                            }
+                            
                               print(cartList);
+
+                              print(sum);
+                              cartController.totalCartPayment(sum);
 
                           },
                           child: Container(
