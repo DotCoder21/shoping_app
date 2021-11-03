@@ -116,6 +116,8 @@ class _DetailScreenState extends State<DetailScreen> {
                               print(sum);
                               cartController.totalCartPayment(sum);
 
+                              Get.back();
+
                           },
                           child: Container(
                             height: Get.height * 0.1,

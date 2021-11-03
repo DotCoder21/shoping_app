@@ -121,7 +121,7 @@ class _CartScreenState extends State<CartScreen> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 7),
+                                                horizontal: 8, vertical: 5),
                                             child: Container(
                                               height: Get.height * 0.034,
                                               width: Get.width * 0.08,
@@ -177,7 +177,7 @@ class _CartScreenState extends State<CartScreen> {
                       ],
                     ),
                     customButton(
-                        height: 0.09,
+                        height: 0.05,
                         width: 0.46,
                         text: "Pay Now",
                         textColor: Colors.white,
@@ -230,13 +230,10 @@ class _IncState extends State<Inc> {
                 if (counter <= 0) {
                 } else {
                   counter--;
+                  setState(() {
+                    
+                  });
 
-                  // var cal = cartList[widget.index].itemPrice * counter;
-
-                  // var total = cartController.totalCartPayment - cal;
-
-                  // cartController.totalCartPayment(total.value);
-                  // setState(() {});
                 }
               });
             },
@@ -244,21 +241,9 @@ class _IncState extends State<Inc> {
         Text(counter.toString()),
         TextButton(
           onPressed: () {
+            counter ++;
             setState(() {
-              counter++;
-
-              var cal = cartList[widget.index].itemPrice * counter;
-
-              print(cal);
-
-              var total = cartController.totalCartPayment += cal;
-              print(total);
-
-              // var total = cartController.totalCartPayment + cal;
-              // print(total);
-
-              // cartController.totalCartPayment();
-              setState(() {});
+              
             });
           },
           child: Icon(Icons.add),
