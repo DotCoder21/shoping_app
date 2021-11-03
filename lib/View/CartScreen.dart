@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shopify_app/AppConstants/AppConstants.dart';
 import 'package:shopify_app/DATA/AppData.dart';
 import 'package:shopify_app/Widgets/myWidgets.dart';
+import 'package:shopify_app/controllers/cartController.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -11,6 +12,10 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
+
+  CartController cartController = Get.put(CartController());
+
   int counter = 0;
   @override
   Widget build(BuildContext context) {
@@ -28,14 +33,19 @@ class _CartScreenState extends State<CartScreen> {
                 iconColor: Colors.pinkAccent,
                 iconBackground: Colors.white,
                 text1: "",
-                text2: "Card",
+                text2: "Cart",
                 image: "assets/images/image7.jpg",
-                radius: 25,
+                radius: 20,
               ),
               Container(
                 height: Get.height * 0.58,
-                child: ListView.builder(
-                    itemCount: cardList.length,
+                child: cartList.length <= 0 ? Container(
+                  margin:EdgeInsets.only(top: 40),
+                  child:
+                     Text("No Item Available"),
+                  
+                ) : cartList.isEmpty || cartList ==null? Container():ListView.builder(
+                    itemCount: cartList.length,
                     itemBuilder: (cxt, index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -56,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
-                                          cardList[index].image,
+                                          cartList[index].image,
                                         ),
                                         fit: BoxFit.cover),
                                     borderRadius: BorderRadius.circular(16)),
@@ -66,12 +76,12 @@ class _CartScreenState extends State<CartScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    cardList[index].itemName,
+                                    cartList[index].itemName,
                                     style: AppConstants.kDarkStyle
                                         .copyWith(fontSize: 12),
                                   ),
                                   Text(
-                                    cardList[index].genderStyle,
+                                    cartList[index].genderStyle,
                                     style: AppConstants.kLightStyle
                                         .copyWith(fontSize: 12),
                                   ),
@@ -79,7 +89,7 @@ class _CartScreenState extends State<CartScreen> {
                                     height: Get.height * 0.024,
                                   ),
                                   Text(
-                                    cardList[index].itemPrice,
+                                    cartList[index].itemPrice,
                                     style: AppConstants.kDarkStyle,
                                   ),
                                 ],
@@ -148,10 +158,10 @@ class _CartScreenState extends State<CartScreen> {
                           style: AppConstants.kDarkStyle
                               .copyWith(color: Colors.grey),
                         ),
-                        Text(
-                          "\$400",
+                        Obx(()=>Text(
+                          cartController.totalCartPayment.toString(),
                           style: AppConstants.kDarkStyle,
-                        ),
+                        ),),
                       ],
                     ),
                     customButton(

@@ -91,7 +91,8 @@ class _DetailScreenState extends State<DetailScreen> {
                               CardsModel(
                                 image: widget.item.image,
                                 itemName: widget.item.itemName,
-                                itemPrice: widget.item.itemPrice
+                                itemPrice: widget.item.itemPrice,
+                                genderStyle: "Lorem Ipsum Text is Used Here"
                               ),
 
                             );
