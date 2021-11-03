@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopify_app/View/CartScreen.dart';
 import 'package:shopify_app/View/orders.dart';
 import 'package:shopify_app/View/profile.dart';
+import 'package:shopify_app/utils/appColors.dart';
 
 import 'View/homeScreen.dart';
 
@@ -39,7 +40,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.home , color: index == 0 ?AppColors.primaryColor.withOpacity(0.5) : Colors.grey),
                 onPressed: () {
                   setState(() {
                     index = 0;
@@ -47,7 +48,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.shopping_cart),
+                icon: Icon(Icons.shopping_cart,color: index == 1 ?AppColors.primaryColor.withOpacity(0.5) : Colors.grey),
                 onPressed: () {
                   setState(() {
                     index = 1;
@@ -55,7 +56,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.wrap_text_sharp),
+                icon: Icon(Icons.list,color: index == 2 ?AppColors.primaryColor.withOpacity(0.5) : Colors.grey),
                 onPressed: () {
                   setState(() {
                     index = 2;
@@ -63,7 +64,7 @@ class _HomeState extends State<Home> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.shop),
+                icon: Icon(Icons.person_outline,color: index == 3 ?AppColors.primaryColor.withOpacity(0.5) : Colors.grey),
                 onPressed: () {
                   setState(() {
                     index = 3;

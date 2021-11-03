@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         iconColor: AppColors.primaryColor.withOpacity(0.5),
                         text1: "Hallo zaskia",
                         text2: "Jakarta INA",
-                        image: "assets/images/image7.jpg",
+                        image: "assets/images/image1.jpg",
                         radius: 20,
                       ),
                       Row(
